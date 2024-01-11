@@ -1,0 +1,20 @@
+- In nextjs version 14 routing is pretty stade forword. Based on the file name the route name will define.
+- Inside app directory each folder mean a route (if you make a file name page inside that folder). 
+- Folder name will be the name of the route name whereas if you didn't provide any file with name of 'page' inside the app/any-folder it won't gonna route
+- App/page is a default route like a home route on any application and 'layout' file is automaticlly gonna create for routing perpouse.
+- Layout file can contain 'Header/Footer' any type of element that gonna server all route 
+- If any route need a specific layout for that route that can by create by make an file name 'layout.tsx' inside that route folder like 'app/dashboard/layout.tsx'
+- Metadata funcation will automaticlly serve in the route if its present in that folder route page, if not then the default app/layout.js metadata funcation will serve
+- App/api/route.ts file is for api route on the other hand page.tsx for browser route
+- Outside of app directory all the directory is for global use cases.
+- Nextjs 14 support alies name for import file. To use it inside any app first need to configure it inside tesconfig.json file
+- In this application I made i all the possible folder structure can be so it may not all the folder will use in current application but in future application its gonna save a tremendous amount of time
+- If any folder/route inside the app directory is not wanting to be public you can put a underscore prefix(_lib) the folder name then the route won't find it inside the browser.
+- To make more orginise your code Nextjs allow you to make group of your file you can group of a specific features of your app then can put all that features related route inside that group directory such as (app/(auth)/login, app/(auth)/register).
+- Eariler my point there is a catch when make a group that way you have your route like this 'localhost:3000/auth/login' but you definitely don't want that so to ignore 'auth' part you can make the auth folder like this '(auth)j' inside a parantheses it will ingore auth part.
+- To make nasted route you have to make nested file like this way (products/page.js, products/product/page.js) first one for its self list of products page second on is for individual product page.
+- To make dynamic route make the folder this way '[productId]/page.tsx' "output:localhost:3000/2 " it will serve as dynamic route you can placed it inside products folder as well the you have to call it like this way 'localhost:3000/products/2'.
+- There are multiple type of new naming convention file that allow you to manage your application more effective way such as (loading, error, not-found).tsx these are the file name that you can put any route or in global based on your niche. 
+- By default Nextjs use server component but if you use any type of hooks inside your application you will face some error to resolve it you can declare that it's a clicnt component by writing 'use client' message at the top of the file.
+- for more information read the official documantation here: https://nextjs.org/docs/app/building-your-application/routing
+
