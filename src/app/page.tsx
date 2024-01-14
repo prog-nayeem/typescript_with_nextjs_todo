@@ -1,14 +1,51 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import TodoForm from "@/components/todo_form";
+import TodoItem from "@/components/todo_item";
+import TodosFilter from "@/components/todos_filter";
+import { useTodoContext } from "@/hooks/use_todo_context";
+import { TodoProvider } from "context/todo_context";
+import React, { useEffect, useState } from "react";
+
+const App: React.FC = () => {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <div className="z-10 max-w-5xl absolute bg-orange-400 min-h-96 rounded-3xl min-w-96 items-center justify-center font-mono lg:flex">
-        <h2 className=" w-full text-center text-xl font-bold text-white">
-          Make your todo here!
+    <TodoProvider>
+      <Home />
+    </TodoProvider>
+  );
+};
+
+export default App;
+
+const Home: React.FC = () => {
+  const { todos, setTodos } = useTodoContext();
+
+  useEffect(() => {
+    const storeTodos = localStorage.getItem("todos");
+    if (storeTodos) {
+      setTodos(JSON.parse(storeTodos) as string[]);
+    }
+  }, []);
+
+  return (
+    <main className="flex min-h-screen bg-gradient-to-t from-blue-500 bg-green-500 flex-col items-center justify-center p-24">
+      <div className="z-10 w-[40rem] flex flex-col  p-6 h-[35rem] rounded-2xl bg-white shadow-sm min-w-96 items-center justify-center font-mono">
+        <h2 className=" w-full text-center text-xl font-bold">
+          Make your Todos here!
         </h2>
-        {/* <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none"></div> */}
+        <TodoForm />
+
+        <div className="w-[28rem] ">
+          <TodosFilter />
+          <hr />
+          <div className="h-[20rem] px-2 overflow-y-auto">
+            {todos.length > 0 &&
+              todos.map((value, index) => (
+                <TodoItem todoText={value} key={index} index={index} />
+              ))}
+          </div>
+        </div>
       </div>
     </main>
   );
-}
+};
